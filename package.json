@@ -1,0 +1,42 @@
+{
+  "name": "mobx-collection",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "prebuild": "npm run lint",
+    "build:dev": "webpack --config ./webpack.config.js --mode=development --progress --colors",
+    "build:prod": "webpack --config ./webpack.config.js --mode=production --progress --colors",
+    "clean": "rimraf dist",
+    "lint": "tslint -p tsconfig.json -c tslint.json"
+  },
+  "author": "Dmitry Aharkov",
+  "license": "ISC",
+  "dependencies": {
+    "mobx": "^5.6.0"
+  },
+  "devDependencies": {
+    "awesome-typescript-loader": "^5.2.1",
+    "css-loader": "^1.0.1",
+    "eslint": "^5.8.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-babel": "^5.2.1",
+    "eslint-plugin-import": "^2.14.0",
+    "file-loader": "^2.0.0",
+    "mini-css-extract-plugin": "^0.4.4",
+    "node-sass": "^4.10.0",
+    "rimraf": "^2.6.2",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "tslint": "^5.11.0",
+    "tslint-consistent-codestyle": "^1.14.1",
+    "tslint-eslint-rules": "^5.4.0",
+    "tslint-microsoft-contrib": "^5.2.1",
+    "tslint-react": "^3.6.0",
+    "typescript": "^3.1.6",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-middleware": "^3.4.0",
+    "webpack-hot-middleware": "^2.24.3"
+  }
+}

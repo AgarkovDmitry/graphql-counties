@@ -1,0 +1,146 @@
+{
+  "extends": [
+    "tslint-eslint-rules", "tslint-react", "tslint-microsoft-contrib", "tslint-consistent-codestyle"
+  ],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true,
+      "experimentalDecorators": true,
+      "jsx": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "amd": true,
+    "es6": true,
+    "node": true,
+    "mocha": true
+  },
+  "rules": {
+    "object-curly-spacing": [true, "always"],
+    "array-bracket-spacing": [true, "never"],
+    "whitespace": [
+      true, 
+      "check-branch",
+      "check-decl",
+      "check-operator",
+      "check-module",
+      "check-separator",
+      "check-type",
+      "check-typecast",
+      "check-preblock"
+    ],
+
+    "semicolon": [true, "never"],
+    "quotemark": [true, "single"],
+    "trailing-comma": [
+      true,
+      {
+        "multiline": {
+          "objects": "never",
+          "arrays": "never",
+          "functions": "never",
+          "typeLiterals": "never"
+        }
+      }
+    ],
+    "triple-equals": true,
+
+    "no-var-keyword": true,
+    "no-extra-semi": true,
+    "no-trailing-whitespace": true,
+    "ban": [true, ["alert"]],
+
+    // "dot-notation": true,
+    // "accessor-pairs": true,
+
+    "jsx-alignment": true,
+    "jsx-boolean-value": false,
+    "jsx-curly-spacing": ["always"],
+    "jsx-no-lambda": false,
+    "jsx-key": true,
+    "jsx-no-bind": false,
+    "jsx-wrap-multiline": false,
+    "jsx-no-multiline-js": false,
+    "jsx-no-string-ref": false,
+
+    "missing-jsdoc": false,
+    "no-default-export": false,
+    "no-increment-decrement": false,
+    "import-name": false,
+    "no-relative-imports": false,
+    "binary-expression-operand-order": false,
+    "switch-default": false,
+    "no-require-imports": false,
+    "no-var-requires": false,
+    "no-implicit-dependencies": false,
+    "no-submodule-imports": false,
+    "max-classes-per-file": false,
+    "interface-name": false,
+    "no-unsafe-any": false,
+    "no-floating-promises": false,
+    "completed-docs": false,
+    "match-default-export-name": false,
+    "no-constant-condition": false,
+    "no-backbone-get-set-outside-model": false,
+    "no-function-expression": false,
+    "no-conditional-assignment": false,
+    "no-import-side-effect": false,
+    "no-shadowed-variable": false,
+    "strict-boolean-expressions": false,
+    "no-void-expression": false,
+    "no-string-based-set-timeout": false,
+    "member-ordering": [
+      true,
+      {
+        "order": [
+          "private-instance-field",
+          "protected-instance-field",
+          "public-instance-field",
+          "public-constructor",
+          "private-instance-method",
+          "protected-instance-method",
+          "public-instance-method"
+        ]
+      }
+    ],
+    "no-unnecessary-else": true,
+    "early-exit": [true, { "max-length": 8 }],
+    "radix": false,
+    "align": false,
+    "no-console": false,
+
+    "react-iframe-missing-sandbox": false,
+    "react-anchor-blank-noopener": false,
+    "max-func-body-length": false,
+    "react-a11y-img-has-alt": false,
+    "react-a11y-event-has-role": false,
+    "react-a11y-role-has-required-aria-props": false,
+    "react-a11y-anchors": false,
+
+    "export-name": false,
+    "member-access": false,
+    "typedef": false,
+    "variable-name": false,
+    "no-any": false,
+    "no-reserved-keywords": false,
+    "prefer-type-cast": false,
+    "prefer-method-signature": false,
+    "prefer-array-literal": false,
+    "max-line-length": false,
+    "cyclomatic-complexity": false,
+    "promise-function-async": false,
+    "no-empty": false,
+    "restrict-plus-operands": false,
+    "no-empty-interface": false,
+    "await-promise": false,
+    "no-use-before-declare": false,
+    "prefer-for-of": false,
+    "type-literal-delimiter": false,
+
+    "react-this-binding-issue": false
+  }
+}

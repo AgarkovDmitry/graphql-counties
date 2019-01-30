@@ -1,0 +1,23 @@
+
+{
+    "compilerOptions": {
+        "outDir": "./dist/",
+        "baseUrl": "./frontend/",
+        "module": "commonjs",
+        "lib": ["dom", "es7"],
+        "target": "es5",
+        "jsx": "react",
+        "noUnusedLocals": true,
+        "sourceMap": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
+    },
+    "exclude": [
+        "./node_modules/*",
+        "**/*.spec.ts"
+    ],
+    "awesomeTypescriptLoaderOptions": {
+      "useCache": true,
+      "useTranspileModule": true
+    }
+}

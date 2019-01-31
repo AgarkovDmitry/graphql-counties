@@ -2,21 +2,20 @@ import { action, computed, isComputedProp, isObservableArray, isObservableMap, i
 
 export default class Prototype<Root> {
   protected root: Root
-  id: number
+  code: string
 
   constructor(root, payload) {
     this.root = root
-    this.id = payload.id
+    this.code = payload.code
   }
 
   @computed get snapshot() {
-    const keys = Object.keys(this)
+    const res = { code: this.code }
 
-    const properties = keys.filter(i => isObservableProp(this, i))
-
-    const res = { id: this.id }
-
-    properties.forEach(prop => res[prop] = toJS(this[prop]))
+    Object
+      .keys(this)
+      .filter(i => isObservableProp(this, i))
+      .forEach(prop => res[prop] = toJS(this[prop]))
 
     return res
   }
@@ -26,9 +25,7 @@ export default class Prototype<Root> {
       return
     }
 
-    const keys = Object.keys(payload)
-
-    keys.forEach(key => {
+    Object.keys(payload).forEach(key => {
       if (isComputedProp(this, key)) {
         return
       }
@@ -40,7 +37,7 @@ export default class Prototype<Root> {
         Object
           .keys(payload[key])
           .forEach(nestedKey => this[key].set(nestedKey, payload[key][nestedKey]))
-      } else if (isObservableProp(this, key)) {
+      } else if (isObservableProp(this, key) && this[key] !== payload[key]) {
         this[key] = payload[key]
       }
     })

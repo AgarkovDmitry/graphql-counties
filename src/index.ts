@@ -1,7 +1,11 @@
-import Collection from './collection'
-import Prototype from './prototype'
+import DataStore from './store/data'
 
-export {
-  Collection,
-  Prototype
+const store = new DataStore()
+
+declare global {
+  interface Window {
+    store: IDataStore
+  }
 }
+
+window.store = store

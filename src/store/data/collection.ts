@@ -1,7 +1,6 @@
 import { action, computed, observable } from 'mobx'
 import Item from './prototype'
 
-
 export default class Collection<Root, T extends Item<Root>> {
   protected root: Root
 
@@ -23,15 +22,8 @@ export default class Collection<Root, T extends Item<Root>> {
     return new Item(this.root, payload).merge(payload) as T
   }
 
-  findById(id) {
-    return this.data.find(item => item.id === id)
-  }
-
-  removeById(id) {
-    const index = this.data.findIndex(item => item.id === id)
-    if (index !== -1) {
-      this.data.splice(index, 1)
-    }
+  findByCode(code: string) {
+    return this.data.find(item => item.code === code)
   }
 
   @action clear () {
@@ -40,7 +32,7 @@ export default class Collection<Root, T extends Item<Root>> {
 
   @action merge (...items) {
     items.forEach(i => {
-      const item = this.findById(i.id)
+      const item = this.findByCode(i.code)
 
       if (!item) {
         return
@@ -50,7 +42,7 @@ export default class Collection<Root, T extends Item<Root>> {
     })
     this.data.push(
       ...items
-      .filter(i => !this.findById(i.id))
+      .filter(i => !this.findByCode(i.code))
       .map(item => this.generate(item))
     )
   }

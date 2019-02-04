@@ -14,6 +14,7 @@ export default class ContinentCollection extends Collection<IDataStore, Item> {
   handleQueryResponse(res: IResponse) {
     if (res.continents) {
       this.merge(...res.continents)
+      this.loaded = true
     }
 
     if (res.continent) {

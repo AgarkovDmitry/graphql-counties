@@ -3,6 +3,7 @@ import Item from './prototype'
 
 export default class Collection<Root, T extends Item<Root>> {
   protected root: Root
+  @observable loaded: boolean = false
 
   @observable data: T[] = []
 

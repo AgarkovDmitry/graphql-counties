@@ -2,7 +2,7 @@
 {
     "compilerOptions": {
         "outDir": "./dist/",
-        "baseUrl": "./frontend/",
+        "baseUrl": "./src/",
         "module": "commonjs",
         "lib": ["dom", "es7"],
         "target": "es5",

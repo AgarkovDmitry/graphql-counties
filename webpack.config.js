@@ -8,7 +8,7 @@ module.exports = {
     poll: true
   },
   entry: {
-    app: ['./src/index']
+    app: './src/index'
   },
   output: {
     filename: '[name].bundle.js',

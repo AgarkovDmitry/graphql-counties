@@ -14,6 +14,7 @@ export default class LanguageCollection extends Collection<IDataStore, Item> {
   handleQueryResponse(res: IResponse) {
     if (res.languages) {
       this.merge(...res.languages)
+      this.loaded = true
     }
 
     if (res.language) {

@@ -14,6 +14,7 @@ export default class CountryCollection extends Collection<IDataStore, Item> {
   handleQueryResponse(res: IResponse) {
     if (res.countries) {
       this.merge(...res.countries)
+      this.loaded = true
     }
 
     if (res.country) {

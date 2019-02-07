@@ -26,14 +26,12 @@ export default class AddBranchPage extends React.Component<IProps> {
   }
 
   componentDidMount() {
-    if (this.root.continents.loaded) {
-      return
-    }
-
     this.root.query(`
-      continents {
-        code
-        name
+      {
+        continents {
+          code
+          name
+        }
       }
     `)
   }

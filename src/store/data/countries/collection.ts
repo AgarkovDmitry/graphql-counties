@@ -11,13 +11,14 @@ export default class CountryCollection extends Collection<IDataStore, Item> {
     return new Item(this.root, payload).merge(payload)
   }
 
-  handleQueryResponse(res: IResponse) {
+  handleQueryResponse(res: IResponse, query: string) {
     if (res.countries) {
+      super.handleQueryResponse(res, query)
       this.merge(...res.countries)
-      this.loaded = true
     }
 
     if (res.country) {
+      super.handleQueryResponse(res, query)
       this.merge(res.country)
     }
   }

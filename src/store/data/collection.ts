@@ -3,7 +3,7 @@ import Item from './prototype'
 
 export default class Collection<Root, T extends Item<Root>> {
   protected root: Root
-  @observable loaded: boolean = false
+  @observable cachedQueries: string[] = []
 
   @observable data: T[] = []
 
@@ -21,6 +21,23 @@ export default class Collection<Root, T extends Item<Root>> {
 
   protected generate (payload) {
     return new Item(this.root, payload).merge(payload) as T
+  }
+
+  shouldQueryBeFetched(query: string) {
+    return !this.cachedQueries.find(q => q === query)
+  }
+
+  cacheQuery(query: string) {
+    const index = this.cachedQueries.findIndex(q => q === query)
+    if (index !== -1) {
+      this.cachedQueries.splice(index, 1)
+    }
+
+    this.cachedQueries.push(query)
+  }
+
+  handleQueryResponse(res: any, query: string) {
+    this.cacheQuery(query)
   }
 
   findByCode(code: string) {

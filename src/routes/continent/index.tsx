@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { inject, observer } from 'mobx-react'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 const styles = require('./style.scss')
 
@@ -31,12 +31,14 @@ export default class AddBranchPage extends React.Component<IProps> {
 
   componentDidMount() {
     this.root.query(`
-      continent(code: ${JSON.stringify(this.code)}) {
-        code
-        name
-        countries {
+      {
+        continent(code: ${JSON.stringify(this.code)}) {
           code
           name
+          countries {
+            code
+            name
+          }
         }
       }
     `)

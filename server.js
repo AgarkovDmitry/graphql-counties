@@ -32,12 +32,12 @@ if (process.env.NODE_ENV === 'development') {
   app.use(whm(compiler))
 }
 
-app.get('*', (req, res) => {
-  res.sendFile('./index.html')
+app.get('/*', (req, res) => {
+  res.sendFile(__dirname + '/index.html')
 })
 
 app.listen(5000, () => {
-  console.log('main app listening on port 8080!\n')
+  console.log('main app listening on port 5000!\n')
 })
 
 

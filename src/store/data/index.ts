@@ -20,22 +20,36 @@ export default class DataStore {
   countries: CountryCollection
   languages: LanguageCollection
 
+  private get collections() {
+    return [
+      this.continents,
+      this.countries,
+      this.languages
+    ]
+  }
+
   constructor() {
     this.continents = new ContinentCollection(this)
     this.countries = new CountryCollection(this)
     this.languages = new LanguageCollection(this)
   }
 
-  async query(query: string, variables: any = {}) {
-    // add caching...
-    const res = await axios.post(endpoint, { operationName: null, query, variables })
-    this.handleQueryResponse(res.data.data)
+  shouldQueryBeFetched(query: string, refetch?: boolean) {
+    return refetch || this.collections.reduce((res, col) => res && col.shouldQueryBeFetched(query), true)
   }
 
-  handleQueryResponse(res: IResponse) {
-    this.continents.handleQueryResponse(res)
-    this.countries.handleQueryResponse(res)
-    this.languages.handleQueryResponse(res)
+  async query(query: string, variables: any = {}, refetch?: boolean) {
+    if (this.shouldQueryBeFetched(query, refetch)) {
+      //handle variables cache
+      const res = await axios.post(endpoint, { operationName: null, query, variables })
+      this.handleQueryResponse(res.data.data, query)
+    }
+  }
+
+  handleQueryResponse(res: IResponse, query: string) {
+    this.continents.handleQueryResponse(res, query)
+    this.countries.handleQueryResponse(res, query)
+    this.languages.handleQueryResponse(res, query)
   }
 }
 

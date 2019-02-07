@@ -11,13 +11,14 @@ export default class LanguageCollection extends Collection<IDataStore, Item> {
     return new Item(this.root, payload).merge(payload)
   }
 
-  handleQueryResponse(res: IResponse) {
+  handleQueryResponse(res: IResponse, query: string) {
     if (res.languages) {
+      super.handleQueryResponse(res, query)
       this.merge(...res.languages)
-      this.loaded = true
     }
 
     if (res.language) {
+      super.handleQueryResponse(res, query)
       this.merge(res.language)
     }
   }

@@ -11,13 +11,14 @@ export default class ContinentCollection extends Collection<IDataStore, Item> {
     return new Item(this.root, payload).merge(payload)
   }
 
-  handleQueryResponse(res: IResponse) {
+  handleQueryResponse(res: IResponse, query: string) {
     if (res.continents) {
+      super.handleQueryResponse(res, query)
       this.merge(...res.continents)
-      this.loaded = true
     }
 
     if (res.continent) {
+      super.handleQueryResponse(res, query)
       this.merge(res.continent)
     }
   }

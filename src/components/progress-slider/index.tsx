@@ -30,8 +30,8 @@ interface IProps {
 // }
 
 export default function (props: IProps) {
-  const [max, setMax] = React.useState(100)
-  const [min, setMin] = React.useState(0)
+  const [max, setMax] = React.useState(props.maxValue)
+  const [min, setMin] = React.useState(props.minValue)
   const [key, setKey] = React.useState('')
   const [hasChanged, setHasChanged] = React.useState(false)
   const progressBarEl = React.useRef(null)

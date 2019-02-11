@@ -1,0 +1,23 @@
+$gold: #e4ae33;
+$black: #333333;
+$white: #fefefe;
+
+$winGreen: #54b628;
+$loseRed: #e0441e;
+
+$mainColor: #50c878;
+
+.root{
+  display: flex;
+  flex-basis: 10%;
+  justify-content: space-between;
+  background: black;
+}
+
+.link{
+  flex-basis: 10%;
+  color: $gold;
+  padding: 10px;
+  text-decoration: none;
+  font-size: 16px;
+}

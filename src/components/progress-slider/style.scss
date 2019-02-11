@@ -1,0 +1,208 @@
+
+.skillBlock{
+  padding: 25px 40px;
+  font-size: 14px;
+}
+
+.skillTitle{
+  flex-basis: 10%;
+  color: white;
+  font-weight: bold;
+}
+
+.skillRepresantation{
+  display: flex;
+  flex-basis: 100%;
+}
+
+.progressBarWrap{
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  position: relative;
+  flex-basis: 80%;
+  margin: 40px auto;
+}
+
+.progressBar{
+  height: 5px;
+}
+
+.emptyZone {
+  background: #2d3c49;
+  border-radius: 20px;
+  height: 5px;
+  width: 100%;
+  position: absolute;
+}
+
+.currentBlock{
+  position: relative;
+}
+
+.completeZone {
+  background: #00b1ff;
+  border-radius: 20px;
+  height: 5px;
+  position: absolute;
+  width: 100%;
+}
+
+.currentToggle{
+  position: relative;
+}
+
+.currentToggleCircle{
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: #00b1ff;
+  border: 3px solid white;
+  border-radius: 30px;
+  transform: translate(50%);
+  right: 2px;
+  top: -25px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.disabledCurrentToggleCircle{
+  @extend .currentToggleCircle;
+  cursor: unset;
+  right: 8px;
+}
+
+.currentToggleConnector{
+  position: absolute;
+  height: 25px;
+  transform: translate(50%);
+  background: #00b1ff;
+  top: -20px;
+  right: 2px;
+  width: 1px;
+}
+
+.desiredBlock{
+  position: relative;
+}
+
+.desiredZone {
+  background: #ffd700;
+  border-radius: 20px;
+  height: 5px;
+  position: absolute;
+  width: 100%;
+}
+
+.desiredToggleCircle{
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: #ffd700;
+  border: 3px solid white;
+  border-radius: 30px;
+  top: 14px;
+  transform: translate(50%);
+  right: 2px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.disabledDesiredToggleCircle{
+  @extend .desiredToggleCircle;
+  cursor: unset;
+}
+
+.desiredToggleConnector{
+  position: absolute;
+  height: 25px;
+  width: 2px;
+  background: #ffd700;
+  top: 0px;
+  transform: translate(50%);
+  right: 2px;
+  width: 1px;
+}
+
+.percentZone{
+  flex-basis: 20%;
+  font-weight: bold;
+  padding-left: 8px;
+  display: flex;
+  margin: auto;
+}
+
+.currentPercent{
+  color: #00b1ff;
+}
+
+.percentDelimeter{
+  color: white;
+  margin: 0px 3px;
+}
+
+.desiredPercent{
+  color: #ffd700;
+}
+
+.steps{
+  margin: 1px 3px;
+  position: relative;
+}
+
+.step{
+  position: absolute;
+  transform: translate(-50%);
+}
+
+.stepShortLine{
+  width: 1px;
+  height: 10px;
+  background: white;
+  border-radius: 5px;
+  margin: auto;
+}
+
+.stepLongLine{
+  width: 1px;
+  height: 15px;
+  background: white;
+  border-radius: 5px;
+  margin: auto;
+}
+
+.stepText{
+  padding-top: 10px;
+  font-size: 12px;
+  color: white;
+}
+
+@media (min-width: 320px) and (max-width: 768px) {
+  .progressBar{
+    width: 70%;
+    flex-basis: 70%;
+  }
+
+  .percentZone{
+    flex-basis: 30%;
+  }
+
+  .steps{
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .progressBar{
+    width: 70%;
+    flex-basis: 70%;
+  }
+
+  .percentZone{
+    flex-basis: 30%;
+  }
+
+  .steps{
+    display: none;
+  }
+}

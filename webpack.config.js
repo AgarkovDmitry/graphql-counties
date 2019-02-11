@@ -20,7 +20,7 @@ module.exports = {
       { test: /.(ts|tsx)$/, use: 'awesome-typescript-loader', exclude: /node_modules/ },
       {
         test: /\.(css|scss)$/,
-        include: path.resolve('./frontend'),
+        include: path.resolve('./src'),
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader?modules',
@@ -32,7 +32,7 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
-    modules: ['node_modules', 'frontend']
+    modules: ['node_modules', 'src']
   },
   plugins: [
     new MiniCssExtractPlugin({ filename: 'bundle.css' })

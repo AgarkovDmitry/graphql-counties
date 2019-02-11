@@ -141,6 +141,7 @@
     "prefer-for-of": false,
     "type-literal-delimiter": false,
 
-    "react-this-binding-issue": false
+    "react-this-binding-issue": false,
+    "linebreak-style": false
   }
 }

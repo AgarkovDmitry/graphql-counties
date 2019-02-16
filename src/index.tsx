@@ -1,10 +1,10 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 
-import { Provider } from 'mobx-react'
-
 import Routes from './routes'
 import DataStore from './store/data'
+
+import { Router, StoreProvider } from './context'
 
 const store = new DataStore()
 
@@ -17,8 +17,10 @@ declare global {
 window.store = store
 
 ReactDOM.render(
-  <Provider store={ store }>
-    <Routes />
-  </Provider>,
+  <StoreProvider>
+    <Router>
+      <Routes />
+    </Router>
+  </StoreProvider>,
   document.getElementById('root')
 )

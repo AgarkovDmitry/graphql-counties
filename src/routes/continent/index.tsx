@@ -1,38 +1,23 @@
 import * as React from 'react'
 
-import { inject, observer } from 'mobx-react'
+import { observer } from 'mobx-react-lite'
 import { withRouter } from 'react-router-dom'
+
+import { useStore } from 'context'
 
 const styles = require('./style.scss')
 
-interface IProps {
-  history?: any
-  match?: any
-}
+export default withRouter(observer(function(props: { match?: any }) {
+  const store = useStore()
 
-@withRouter
-@inject('store')
-@observer
-export default class AddBranchPage extends React.Component<IProps> {
-  root: IDataStore
+  const code = props.match.params.code
 
-  get code() {
-    return this.props.match.params.code
-  }
+  const continent = store.continents.findByCode(code)
 
-  get continent() {
-    return this.root.continents.findByCode(this.code)
-  }
-
-  constructor(props) {
-    super(props)
-    this.root = props.store
-  }
-
-  componentDidMount() {
-    this.root.query(`
+  React.useEffect(() => {
+    store.query(`
       {
-        continent(code: ${JSON.stringify(this.code)}) {
+        continent(code: ${JSON.stringify(code)}) {
           code
           name
           countries {
@@ -42,15 +27,24 @@ export default class AddBranchPage extends React.Component<IProps> {
         }
       }
     `)
-  }
+  })
 
-  render() {
-    return (
-      <div className={ styles.root }>
-        <div>
-          Continent
-        </div>
+  return (
+    <div className={ styles.root }>
+      <div>
+        Continent
       </div>
-    )
-  }
-}
+      {
+        continent && <div>
+          { continent.name }
+          { continent.code }
+          { continent.countries.map(country => (
+            <div key={ country.code }>
+              { country.name }
+            </div>
+          )) }
+        </div>
+      }
+    </div>
+  )
+}))

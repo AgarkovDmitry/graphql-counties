@@ -142,6 +142,7 @@
     "type-literal-delimiter": false,
 
     "react-this-binding-issue": false,
-    "linebreak-style": false
+    "linebreak-style": false,
+    "function-name": false
   }
 }

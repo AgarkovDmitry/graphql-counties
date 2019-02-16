@@ -10,7 +10,7 @@
     "prestart:dev": "npm run build:dev",
     "prestart:prod": "npm run build:prod",
     "start:dev": "nodemon -w backend --exec \"set NODE_ENV=development&& babel-node server.js --presets es2015,stage-2\"",
-    "start:prod": "NODE_ENV=production babel-node server.js --presets es2015,stage-2",
+    "start:prod": "set NODE_ENV=production babel-node server.js --presets es2015,stage-2",
     "clean": "rimraf dist",
     "lint": "tslint -p tsconfig.json -c tslint.json"
   },
@@ -22,7 +22,7 @@
     "compression": "^1.7.3",
     "express": "^4.16.4",
     "mobx": "^5.6.0",
-    "mobx-react": "^5.4.3",
+    "mobx-react-lite": "^1.0.1",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "react-router-dom": "^4.3.1"
@@ -31,6 +31,7 @@
     "@types/node": "^10.12.21",
     "@types/react": "^16.8.2",
     "@types/react-dom": "^16.8.0",
+    "@types/react-router-dom": "^4.3.1",
     "awesome-typescript-loader": "^5.2.1",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",

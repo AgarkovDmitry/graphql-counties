@@ -11,23 +11,15 @@ interface IProps {
   id?: string
 }
 
-// @observer
-// export default class ProgressSlider extends React.Component<IProps> {
-
-//   disableSelect = () => {
-//     document.onselectstart = (e) => {
-//       e.preventDefault()
-
-//       return false
-//     })
-//   }
-
-//   enableSelect = () => {
-//     document.onselectstart = (e) => {
-//       return true
-//     })
-//   }
-// }
+const move = (setter, x, width, left, right) => {
+  if (x < left) {
+    setter(0)
+  } else if (x > right) {
+    setter(100)
+  } else {
+    setter(Math.floor((100 * (x - left) / width)))
+  }
+}
 
 export default function (props: IProps) {
   const [max, setMax] = React.useState(props.maxValue)
@@ -47,30 +39,16 @@ export default function (props: IProps) {
         const { left, right, width } = progressBarEl.current.getBoundingClientRect()
 
         if (key === 'min') {
-          if (pageX > left && pageX < right) {
-            setMin(Math.floor((100 * (pageX - left) / width)))
-          } else if (pageX > right) {
-            setMin(100)
-          } else {
-            setMin(0)
-          }
-
+          move(setMin, pageX, width, left, right)
           if (min > max) { setMax(min) }
         } else if (key === 'max') {
-          if (pageX > left && pageX < right) {
-            setMax(Math.floor((100 * (pageX - left) / width)))
-          } else if (pageX > right) {
-            setMax(100)
-          } else {
-            setMax(0)
-          }
-
+          move(setMax, pageX, width, left, right)
           if (max < min) { setMin(max) }
         }
 
         setHasChanged(true)
 
-        // window.getSelection().removeAllRanges()
+        window.getSelection().removeAllRanges()
       }
 
       return false

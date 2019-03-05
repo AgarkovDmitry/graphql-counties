@@ -11,45 +11,75 @@ interface IProps {
   id?: string
 }
 
-const move = (setter, x, width, left, right) => {
-  if (x < left) {
-    setter(0)
-  } else if (x > right) {
-    setter(100)
-  } else {
-    setter(Math.floor((100 * (x - left) / width)))
+interface IReducerState {
+  min: number
+  max: number
+  hasChanged: boolean
+  key: string
+}
+
+function reducer(state: IReducerState, { type, payload }: { type: string, payload?: any }): IReducerState {
+  switch (type) {
+    case 'move': {
+      return { ...state, min: payload.min, max: payload.max, hasChanged: true }
+    }
+
+    case 'setKey': {
+      return { ...state, key: payload.key }
+    }
+
+    case 'reset': {
+      return { ...state, key: '', hasChanged: false }
+    }
   }
 }
 
+function move (x: number, width: number, left: number, right: number) {
+  if (x < left) {
+    return 0
+  }
+
+  if (x > right) {
+    return 100
+  }
+
+  return Math.floor((100 * (x - left) / width))
+}
+
 export default function (props: IProps) {
-  const [max, setMax] = React.useState(props.maxValue)
-  const [min, setMin] = React.useState(props.minValue)
-  const [key, setKey] = React.useState('')
-  const [hasChanged, setHasChanged] = React.useState(false)
   const progressBarEl = React.useRef(null)
+  const [state, dispatch] = React.useReducer(reducer, { min: props.minValue, max: props.maxValue, hasChanged: false, key: '' })
+  const { min, max, key, hasChanged } = state
 
   React.useEffect(() => {
     const hangleMove = (e, pageX) => {
-      if (key) {
-        e.stopPropagation()
-        e.preventDefault()
-        e.cancelBubble = true
-        e.returnValue = false
-
-        const { left, right, width } = progressBarEl.current.getBoundingClientRect()
-
-        if (key === 'min') {
-          move(setMin, pageX, width, left, right)
-          if (min > max) { setMax(min) }
-        } else if (key === 'max') {
-          move(setMax, pageX, width, left, right)
-          if (max < min) { setMin(max) }
-        }
-
-        setHasChanged(true)
-
-        window.getSelection().removeAllRanges()
+      if (!key) {
+        return
       }
+
+      e.stopPropagation()
+      e.preventDefault()
+      e.cancelBubble = true
+      e.returnValue = false
+
+      const { left, right, width } = progressBarEl.current.getBoundingClientRect()
+
+      const movedValue = move(pageX, width, left, right)
+
+      let _min = min
+      let _max = max
+
+      if (key === 'min') {
+        _min = movedValue
+        _max = movedValue > max ? movedValue : max
+      } else if (key === 'max') {
+        _min = movedValue < min ? movedValue : min
+        _max = movedValue
+      }
+
+      dispatch({ type: 'move', payload: { min: _min, max: _max } })
+
+      window.getSelection().removeAllRanges()
 
       return false
     }
@@ -59,15 +89,11 @@ export default function (props: IProps) {
     const dragBox = (e) => hangleMove(e, e.pageX)
 
     const reset = () => {
-      setKey('')
-
-      if (!hasChanged) {
-        return
+      if (hasChanged) {
+        props.onSelect({ min, max })
       }
 
-      props.onSelect({ min, max })
-
-      setHasChanged(false)
+      dispatch({ type: 'reset' })
     }
 
     document.addEventListener('touchmove', touchMoveBox)
@@ -85,13 +111,13 @@ export default function (props: IProps) {
 
   const selectMaxBox = () => {
     if (!props.disabled) {
-      setKey('max')
+      dispatch({ type: 'setKey', payload: { key: 'max' } })
     }
   }
 
   const selectMinBox = () => {
     if (!props.disabled) {
-      setKey('min')
+      dispatch({ type: 'setKey', payload: { key: 'min' } })
     }
   }
 
